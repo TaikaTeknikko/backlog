@@ -1,14 +1,65 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Backlog
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content fullscreen>
+
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+      <ion-list-header>To Be Done</ion-list-header>
+      <ion-item *ngFor="let item of todo" routerLink="/details/{{item.id}}">
+        <ion-avatar slot="start">
+          <img src="..\assets\Task.svg" style="height: 50px; width: 50px;">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{item.title}}</h3>
+          <p>{{item.text}}</p>
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+      <ion-list-header>In progress</ion-list-header>
+      <ion-item *ngFor="let item of inprogress" routerLink="/details/{{item.id}}">
+        <ion-avatar slot="start">
+          <img src="..\assets\Task.svg" style="height: 50px; width: 50px;">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{item.title}}</h3>
+          <p>{{item.text}}</p>
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+      <ion-list-header>Finished</ion-list-header>
+      <ion-item *ngFor="let item of finished" routerLink="/details/{{item.id}}">
+        <ion-avatar slot="start">
+          <img src="..\assets\Task.svg" style="height: 50px; width: 50px;">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{item.title}}</h3>
+          <p>{{item.text}}</p>
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" routerLink="/add">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
